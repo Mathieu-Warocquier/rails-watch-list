@@ -1,27 +1,32 @@
-<div class="container mt-3">
+<div class="container mt-4">
   <div class="row">
     <div class="col-12">
       <h1><%= @list.name %></h1>
     </div>
   </div>
   <br>
-  <br>
 
   <div class="row">
       <% @list.bookmarks.each do |bookmark| %>
-      <div class="col-lg-4">
-        <div class= "flat-card p-3 bg-secondary my-3">
-          <%= bookmark.movie.title %>
-          <%= bookmark.movie.overview %>
-          <%= bookmark.comment %>
-          <p> <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %><i class="fa-solid fa-trash d-flex justify-content-end text-success"></i><% end %></p>
+      <div class="col-md-4 d-flex align-items-stretch", style="position:relative;">
+        <div class="card bg-light my-3">
+          <div class="img d-flex justify-content-center p-1">
+            <%= image_tag(bookmark.movie.poster_url, :size=> "200x300") %>
+          </div>
+            <div class= "flat-card p-1">
+              <strong><%= bookmark.movie.title %></strong>
+              <p><%= bookmark.movie.overview %></p>
+              <p><%= bookmark.comment %></p>
+              <p> <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, style:"position:absolute; bottom:5px; right:5px;" do %>
+              <i class="fa-solid fa-trash d-flex justify-content-end align-items-end text-secondary"></i><% end %></p>
+            </div>
         </div>
       </div>
       <% end %>
   </div>
 
-<p><%= link_to "+ Add la movie", new_list_bookmark_path(@list), class: "btn btn-success" %></p>
+  <p><%= link_to "+ Add la movie", new_list_bookmark_path(@list), class: "btn btn-secondary" %></p>
 
-<p><%= link_to "Return at list", lists_path, class: "btn btn-success" %></p>
+  <p><%= link_to "Return at list", lists_path, class: "btn btn-secondary" %></p>
 
 </div>
